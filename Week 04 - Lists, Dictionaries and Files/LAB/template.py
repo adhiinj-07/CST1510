@@ -2,9 +2,9 @@
 RECORD CHECK  -  my version
 ===========================
 
-Name  :
-Lane  :  AI / Cyber / IT      (delete two)
-Date  :
+Name  :Adhithya Krishnan Sunil kumar
+Lane  :Cyber    (delete two)
+Date  :16-10-2026
 
 Run it:   python template.py
 
@@ -20,7 +20,33 @@ Delete these instructions as you replace them with your code.
 #    one-line docstring.
 
 # your function(s) go here
+def check_record(value, limit):
+    """Return difference, percent and status for a record"""
+    difference = value - limit
+    percent = (value / limit) * 100
 
+    if value > limit:
+        status = "OVER"
+    elif value < limit:
+        status = "UNDER"
+    else:
+        status = "AT LIMIT"
+
+    return difference, percent, status
+
+
+def print_report(record_id, value, limit):
+    """Print a formatted report for a record"""
+    difference, percent, status = check_record(value, limit)
+
+    print("=" * 34)
+    print(f"Record: {record_id}")
+    print(f"Value: {value}")
+    print(f"Limit: {limit}")
+    print(f"Difference: {difference}")
+    print(f"Percent of limit: {percent:.1f}%")
+    print(f"Status: {status}")
+    print("=" * 34)
 
 # ====================================================================== STORE
 # 2. Get your records into a list of dicts, each shaped like:
@@ -35,16 +61,57 @@ Delete these instructions as you replace them with your code.
 
 records = []   # replace with your code
 
+records = [
+    {"label": "Server A", "value": 95, "limit": 100},
+    {"label": "Server B", "value": 120, "limit": 100},
+    {"label": "Server C", "value": 80, "limit": 100}
+]
+# =============================================================== PROCESS 
+def check_record(value, limit):
+    """Return difference, percent and status for a record."""
+    difference = value - limit
+    percent = (value / limit) * 100
 
-# =============================================================== PROCESS + OUTPUT
-# 3. Loop over records. For each one, call check_record and print_report.
-#
-#    Excellent : also keep a running count of how many were OVER LIMIT, and
-#                print that once, after the loop ends.
+    if value > limit:
+        status = "OVER"
+    elif value < limit:
+        status = "UNDER"
+    else:
+        status = "AT LIMIT"
 
-# your loop goes here
+    return difference, percent, status
 
 
+def print_report(label, value, limit):
+    """Print a formatted report for a record."""
+    difference, percent, status = check_record(value, limit)
+
+    print("=" * 34)
+    print(f"Record: {label}")
+    print(f"Value: {value}")
+    print(f"Limit: {limit}")
+    print(f"Difference: {difference}")
+    print(f"Percent of limit: {percent:.1f}%")
+    print(f"Status: {status}")
+    print("=" * 34)
+
+    return status
+
+
+records = [
+    {"label": "Server A", "value": 95, "limit": 100},
+    {"label": "Server B", "value": 120, "limit": 100},
+    {"label": "Server C", "value": 80, "limit": 100}
+]
+
+with open("results.txt", "w") as file:
+    for record in records:
+        status = print_report(
+            record["label"],
+            record["value"],
+            record["limit"]
+        )
+        file.write(f"{record['label']}, {status}\n")
 # ==========================================================================
 # 4. Before you finish:
 #

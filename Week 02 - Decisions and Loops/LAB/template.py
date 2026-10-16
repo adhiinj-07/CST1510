@@ -2,8 +2,8 @@
 RECORD CHECK  -  my version
 ===========================
 
-Name  :
-Lane  :  AI / Cyber / IT      (delete two)
+Name  :Adhithya Krishnan Sunil Kumar
+Lane  :Cyber      (delete two)
 Date  :
 
 Run it:   python template.py
@@ -19,8 +19,8 @@ Delete these instructions as you replace them with your code.
 #    - the second is a NUMBER (use float(), not int())
 #    - the third  is a NUMBER (use float(), not int())
 
-label = ""      # replace with an input() call
-value = 0.0     # replace with an input() call, converted with float()
+label = input('Enter the label name: ')     # replace with an input() call
+value = float(input('Enter a value:')  )  # replace with an input() call, converted with float()
 limit = 0.0     # replace with an input() call, converted with float()
 
 
