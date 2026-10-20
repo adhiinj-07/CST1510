@@ -2,9 +2,9 @@
 RECORD CHECK  -  my version
 ===========================
 
-Name  :
-Lane  :  AI / Cyber / IT      (delete two)
-Date  :
+Name  :ADHITHYA KRISHNAN SUNIL KUMAR
+Lane  :Cyber    
+Date  :21-10-2026
 
 Run it:   python template.py
 
@@ -81,3 +81,54 @@ print("=" * 34)
 #    [ ] Run it with a total of 0 and note the error (do not fix it yet)
 #    [ ] Check every function does one job - if a function both calculates
 #        and prints, split it
+""""
+"""
+def status_of(percent):
+    """Returns the status based on percentage."""
+    if percent >= 100:
+        return "OVER LIMIT"
+    elif percent >= 90:
+        return "WARNING"
+    else:
+        return "OK"
+
+
+def check(value, limit):
+    """Calculates difference and percentage."""
+    difference = value - limit
+    percent = (value / limit) * 100
+    return difference, percent
+
+
+def print_report(label, value, limit, difference, percent, status):
+    """Prints a formatted report."""
+    print()
+    print("=" * 34)
+    print(f"  RECORD CHECK  -  {label}")
+    print("=" * 34)
+    print(f"{'Value:':12}{value:>10.2f}")
+    print(f"{'Limit:':12}{limit:>10.2f}")
+    print(f"{'Difference:':12}{difference:>10.2f}")
+    print(f"{'Percent:':12}{percent:>9.2f}%")
+    print(f"{'Status:':12}{status}")
+    print("=" * 34)
+over_limit_count = 0
+
+while True:
+    label = input("Enter label (or 'quit' to stop): ")
+
+    if label.lower() == "quit":
+        break
+
+    value = float(input("Enter value: "))
+    limit = float(input("Enter limit: "))
+
+    difference, percent = check(value, limit)
+    status = status_of(percent)
+
+    if status == "OVER LIMIT":
+        over_limit_count += 1
+
+    print_report(label, value, limit, difference, percent, status)
+print()
+print(f"Total OVER LIMIT records: {over_limit_count}")
