@@ -2,8 +2,8 @@
 RECORD CHECK  -  my version
 ===========================
 
-Name  :
-Lane  :  AI / Cyber / IT      (delete two)
+Name  :Adhithya Krishnan S
+Lane  : Cyber     (delete two)
 Date  :
 
 Run it:   python template.py
@@ -67,3 +67,53 @@ for record in records:
 #    [ ] Check every method only reads/changes its OWN object (self) -
 #        nothing reaches outside itself
 #    [ ] Check every method and __init__ has a one-line docstring
+
+class Record:
+    """Stores a record's label, value and limit."""
+
+    over_limit_count = 0
+
+    def __init__(self, label, value, limit):
+        """Create a record with label, value and limit."""
+        self.label = label
+        self.value = value
+        self.limit = limit
+
+    def status(self):
+        """Return the record status."""
+        percent = (self.value / self.limit) * 100
+
+        if percent >= 100:
+            return "OVER LIMIT"
+        elif percent >= 90:
+            return "WARNING"
+        else:
+            return "OK"
+records = [Record("R-001", 110, 100),Record("R-002", 95, 100),Record("R-003", 75, 100)]
+over_limit_total = 0
+for record in records:
+    print()
+    print("=" * 34)
+    print(f"  RECORD CHECK  -  {record.label}")
+    print("=" * 34)
+
+    print(f"Value : {record.value}")
+    print(f"Limit : {record.limit}")
+
+    status = record.status()
+    print(f"Status: {status}")
+
+    if status == "OVER LIMIT":
+        over_limit_total += 1
+        Record.over_limit_count += 1
+
+    print("=" * 34)
+
+print()
+print(f"OVER LIMIT records: {over_limit_total}")
+print(f"Class total: {Record.over_limit_count}")
+
+
+
+
+
