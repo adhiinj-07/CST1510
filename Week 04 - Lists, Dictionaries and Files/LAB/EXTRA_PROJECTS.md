@@ -37,6 +37,7 @@ loops and Week 3's functions and `random` module.
 
 ---
 
+
 ## Password Generator
 
 **Uses:** lists, `random.choice()`, `random.shuffle()`, `for` loops,
@@ -63,7 +64,6 @@ string building
 11. Write a third `for` loop using `range(nr_numbers)` that does the
     same with `numbers`.
 12. Print `password`.
-
 **Hard version — shuffled order**
 
 13. Create a variable `password_list` and set it to an empty list `[]`.
