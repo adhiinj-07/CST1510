@@ -2,9 +2,9 @@
 RECORD CHECK  -  my version
 ===========================
 
-Name  :
-Lane  :  AI / Cyber / IT      (delete two)
-Date  :
+Name  :Adhithya Krishnan S
+Lane  :Cyber
+Date  :05-11-2026
 
 Run it:   python template.py
 
@@ -49,3 +49,28 @@ print(df)
 #    [ ] Run it and check the percent/status columns by hand for one row
 #    [ ] Check you used & (not "and") if you combined more than one condition
 #    [ ] Check every column your code refers to actually exists - watch case
+import pandas as pd
+df = pd.read_csv("records_sample.csv")
+
+df["percent"] = (df["value"] / df["limit"]) * 10
+df["status"] = df["percent"].apply(
+    lambda p: "OVER LIMIT" if p >= 100
+    else "WARNING" if p >= 90
+    else "OK")
+print("Full DataFrame:")
+print(df)
+print("\nNot OK records:")
+print(df[df["status"] != "OK"])
+
+status_counts = df.groupby("status").size()
+
+print("\nCounts per status:")
+print(status_counts)
+
+df.to_csv("records_processed.csv", index=False)
+status_counts.plot(kind="bar")
+plt.title("Records by Status")
+plt.xlabel("Status")
+plt.ylabel("Count")
+plt.tight_layout()
+plt.savefig("status_counts.png")
