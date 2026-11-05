@@ -50,26 +50,37 @@ print(df)
 #    [ ] Check you used & (not "and") if you combined more than one condition
 #    [ ] Check every column your code refers to actually exists - watch case
 import pandas as pd
-df = pd.read_csv("records_sample.csv")
 
-df["percent"] = (df["value"] / df["limit"]) * 10
+
+
+
+df = pd.read_csv("records_sample.csv")
+df["percent"] = (df["value"] / df["limit"]) * 100
+
 df["status"] = df["percent"].apply(
-    lambda p: "OVER LIMIT" if p >= 100
-    else "WARNING" if p >= 90
-    else "OK")
+    lambda p: "OVER LIMIT"
+    if p >= 100
+    else "WARNING"
+    if p >= 90
+    else "OK"
+)
+
+
 print("Full DataFrame:")
 print(df)
-print("\nNot OK records:")
+
+print("\nRows needing attention:")
 print(df[df["status"] != "OK"])
 
-status_counts = df.groupby("status").size()
-
-print("\nCounts per status:")
-print(status_counts)
+print("\nCount per status:")
+counts = df.groupby("status").size()
+print(counts)
 
 df.to_csv("records_processed.csv", index=False)
-status_counts.plot(kind="bar")
-plt.title("Records by Status")
+
+
+counts.plot(kind="bar")
+plt.title("Record Counts by Status")
 plt.xlabel("Status")
 plt.ylabel("Count")
 plt.tight_layout()
